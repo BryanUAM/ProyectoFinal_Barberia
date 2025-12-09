@@ -1,0 +1,54 @@
+﻿@model BarberiaLosHermanos.Models.Cliente
+
+@{
+    ViewData["Title"] = "Detalles del Cliente";
+}
+
+<div class="container mt-5" style="max-width: 700px;">
+
+    <div class="card shadow-soft border-0">
+
+        <div class="card-header bg-primary text-white text-center fw-bold">
+            👤 Detalles del Cliente
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Nombre:</div>
+                <div class="col-sm-8">@Model.Nombre</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Correo:</div>
+                <div class="col-sm-8">@Model.Email</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Teléfono:</div>
+                <div class="col-sm-8">@Model.Telefono</div>
+            </div>
+
+        </div>
+
+        <div class="card-footer text-center bg-light">
+
+            <a asp-action="Edit" asp-route-id="@Model.ClienteId"
+               class="btn btn-warning fw-semibold me-2">
+                ✏ Editar
+            </a>
+
+            <a asp-action="Delete" asp-route-id="@Model.ClienteId"
+               class="btn btn-danger fw-semibold me-2">
+                🗑 Eliminar
+            </a>
+
+            <a asp-action="Index" class="btn btn-secondary fw-semibold">
+                ⬅ Volver a la lista
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

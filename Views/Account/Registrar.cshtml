@@ -1,0 +1,62 @@
+﻿@model BarberiaLosHermanos.Models.Usuario
+
+@{
+    ViewData["Title"] = "Registrar Usuario";
+}
+
+<h2 class="text-center mt-4 fw-bold">📝 Crear Cuenta</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header text-white text-center py-3 rounded-top-4"
+                 style="background: linear-gradient(135deg, #4e73df, #224abe);">
+                <h4 class="fw-bold mb-0">Crear Cuenta</h4>
+            </div>
+
+            <div class="card-body p-4">
+
+                <form asp-action="Registrar" method="post">
+
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nombre completo</label>
+                        <input type="text" class="form-control" name="Nombre" required />
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Correo electrónico</label>
+                        <input type="email" class="form-control" name="Correo" required />
+                    </div>
+
+                    <!-- Teléfono (nuevo campo) -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Teléfono</label>
+                        <input type="text" class="form-control" name="Telefono" maxlength="12" required />
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Contraseña</label>
+                        <input type="password" class="form-control" name="Contrasena" required />
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary fw-bold py-2">
+                            Crear Cuenta
+                        </button>
+                    </div>
+
+                </form>
+
+                <div class="text-center mt-3">
+                    <a href="/Account/Login">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

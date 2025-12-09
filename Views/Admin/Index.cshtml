@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Panel de Administración";
+}
+
+<h1 class="text-center mt-4 fw-bold">💈 Barbería Los Hermanos</h1>
+
+<p class="text-center text-primary fw-bold fs-4 mt-2">
+    Hola, @User.Identity.Name 👋
+</p>
+
+<p class="text-center text-muted mb-4">
+    Panel de control general
+</p>
+
+
+<div class="text-end mb-3 me-3">
+    <a href="/" class="btn btn-outline-primary fw-semibold">
+        ⬅ Volver al Inicio
+    </a>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-info text-center fw-semibold mt-3">
+        @TempData["Mensaje"]
+    </div>
+}
+
+@if (
+    (ViewBag.CitasPendientes != null && ((List<BarberiaLosHermanos.Models.Appointment>)ViewBag.CitasPendientes).Any()) ||
+    (ViewBag.CitasRealizadas != null && ((List<BarberiaLosHermanos.Models.Appointment>)ViewBag.CitasRealizadas).Any())
+)
+{
+    <div class="row text-center mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-dark text-white mb-3 rounded-4">
+                <div class="card-body">
+                    <h5>Clientes registrados</h5>
+                    <h2>@ViewBag.TotalClientes</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-secondary text-white mb-3 rounded-4">
+                <div class="card-body">
+                    <h5>Servicios activos</h5>
+                    <h2>@ViewBag.TotalServicios</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 bg-success text-white mb-3 rounded-4">
+                <div class="card-body">
+                    <h5>Citas pendientes</h5>
+                    <h2>@ViewBag.TotalCitas</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Citas Pendientes -->
+    <h3 class="mt-4">📌 Citas Pendientes</h3>
+
+    @if (ViewBag.CitasPendientes != null && ((List<BarberiaLosHermanos.Models.Appointment>)ViewBag.CitasPendientes).Any())
+    {
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Barbero</th>
+                    <th>Servicios</th>
+                    <th>Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in (List<BarberiaLosHermanos.Models.Appointment>)ViewBag.CitasPendientes)
+                {
+                    <tr>
+                        <td>@c.Cliente.Nombre</td>
+                        <td>@c.Barbero.Nombre</td>
+                        <td>
+                            <ul class="m-0 ps-3">
+                                @foreach (var s in c.Servicios)
+                                {
+                                    <li>@s.Producto.Nombre</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>@c.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No hay citas pendientes.</div>
+    }
+
+
+    <!-- Citas Realizadas -->
+    <h3 class="mt-4">✔ Citas Realizadas</h3>
+
+    @if (ViewBag.CitasRealizadas != null && ((List<BarberiaLosHermanos.Models.Appointment>)ViewBag.CitasRealizadas).Any())
+    {
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Barbero</th>
+                    <th>Servicios</th>
+                    <th>Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in (List<BarberiaLosHermanos.Models.Appointment>)ViewBag.CitasRealizadas)
+                {
+                    <tr>
+                        <td>@c.Cliente.Nombre</td>
+                        <td>@c.Barbero.Nombre</td>
+                        <td>
+                            <ul class="m-0 ps-3">
+                                @foreach (var s in c.Servicios)
+                                {
+                                    <li>@s.Producto.Nombre</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>@c.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No hay citas realizadas.</div>
+    }
+
+
+    <h3 class="mt-5 mb-3 text-center text-success fw-bold">✅ Citas Realizadas</h3>
+
+    <form asp-action="EliminarCitasRealizadas" method="post" class="text-center mb-4">
+        @Html.AntiForgeryToken()
+        <button type="submit"
+                class="btn btn-danger shadow-sm fw-semibold"
+                onclick="return confirm('¿Está seguro de eliminar TODAS las citas realizadas?');">
+            🗑️ Eliminar todas las citas realizadas
+        </button>
+    </form>
+
+    <div class="row mt-3">
+        @foreach (var cita in ViewBag.CitasRealizadas)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg border-0 rounded-4">
+
+                    <div class="card-header bg-success text-white fw-bold text-center rounded-top-4">
+                        ✅ Cita Realizada
+                    </div>
+
+                    <div class="card-body">
+
+                        <h5 class="fw-bold">@cita.Cliente?.Nombre</h5>
+
+                        <p class="fw-semibold mb-1">
+                            <i class="bi bi-scissors"></i> Servicios:
+                        </p>
+                        <ul class="ps-3">
+                            @foreach (var s in cita.Servicios)
+                            {
+                                <li>@s.Producto.Nombre</li>
+                            }
+                        </ul>
+
+                        <p class="mb-1">
+                            <i class="bi bi-clock-fill text-success"></i>
+                            @cita.FechaHora.ToString("dd/MM/yyyy hh:mm tt")
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center mt-3">
+        No hay citas registradas.
+    </div>
+}

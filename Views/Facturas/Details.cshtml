@@ -1,0 +1,89 @@
+﻿@model BarberiaLosHermanos.Models.Factura
+
+@{
+    ViewData["Title"] = "Factura #" + Model.FacturaId;
+}
+
+<style>
+    .factura-card {
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+        padding: 30px;
+    }
+
+    .factura-header {
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #009688;
+    }
+
+        .factura-header h2 {
+            font-weight: 800;
+            color: #009688;
+        }
+
+    .factura-section-title {
+        font-weight: 700;
+        margin-top: 25px;
+        color: #444;
+    }
+
+    .factura-total {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #009688;
+        text-align: right;
+        border-top: 2px solid #009688;
+        padding-top: 15px;
+        margin-top: 25px;
+    }
+</style>
+
+<div class="factura-card">
+
+    <!-- ENCABEZADO -->
+    <div class="factura-header">
+        <h2>Barbería Los Hermanos</h2>
+        <p class="fw-semibold text-secondary">
+            Factura #@Model.FacturaId
+        </p>
+    </div>
+
+    <!-- CLIENTE -->
+    <h4 class="factura-section-title">👤 Cliente</h4>
+    <p>@Model.Cliente.Nombre</p>
+
+    <!-- BARBERO -->
+    <h4 class="factura-section-title">💈 Barbero</h4>
+    <p>@ViewBag.Barbero</p>
+
+    <!-- FECHA -->
+    <h4 class="factura-section-title">📅 Fecha</h4>
+    <p>@Model.Fecha.ToString("dd/MM/yyyy")</p>
+
+    <!-- SERVICIOS -->
+    <h4 class="factura-section-title">✂ Servicios Realizados</h4>
+
+    <ul class="list-group mb-3">
+        @foreach (var item in Model.ProductosFacturas)
+        {
+            <li class="list-group-item d-flex justify-content-between">
+                @item.Producto.Nombre
+                <span class="fw-bold text-success">₡@item.Producto.Precio.ToString("N2")</span>
+            </li>
+        }
+    </ul>
+
+    <!-- TOTAL -->
+    <div class="factura-total">
+        Total: ₡@Model.MontoTotal.ToString("N2")
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary px-4">⬅ Volver</a>
+    </div>
+
+</div>

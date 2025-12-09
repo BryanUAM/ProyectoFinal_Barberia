@@ -1,0 +1,37 @@
+﻿@model BarberiaLosHermanos.Models.Barbero
+
+@{
+    ViewData["Title"] = "Editar Barbero";
+}
+
+<h2 class="text-center fw-bold mt-4">✏ Editar Barbero</h2>
+
+<div class="row justify-content-center mt-3">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-body">
+
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="BarberoId" />
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Nombre</label>
+                        <input asp-for="Nombre" class="form-control" required />
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="Activo" class="form-check-input" />
+                        <label class="form-check-label">Activo</label>
+                    </div>
+
+                    <div class="text-center">
+                        <a asp-action="Index" class="btn btn-secondary me-2">Cancelar</a>
+                        <button type="submit" class="btn btn-dark">Guardar cambios</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

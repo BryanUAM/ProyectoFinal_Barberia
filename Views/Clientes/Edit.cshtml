@@ -1,0 +1,63 @@
+﻿@model BarberiaLosHermanos.Models.Cliente
+
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<div class="container mt-5" style="max-width: 700px;">
+
+    <div class="card shadow-soft border-0">
+
+        <div class="card-header bg-warning text-dark text-center fw-bold">
+            ✏ Editar Cliente
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="Edit">
+
+                <input type="hidden" asp-for="ClienteId" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Nombre</label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Correo</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Teléfono</label>
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+
+                    <a asp-action="Index" class="btn btn-secondary fw-semibold">
+                        ⬅ Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-warning fw-bold">
+                        Guardar Cambios
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,19 @@
+﻿@model BarberiaLosHermanos.Models.Barbero
+
+@{
+    ViewData["Title"] = "Eliminar Barbero";
+}
+
+<h2 class="text-center fw-bold mt-4 text-danger">🗑 Eliminar Barbero</h2>
+
+<div class="alert alert-danger text-center w-50 mx-auto mt-3">
+    ¿Estás seguro de eliminar al barbero <strong>@Model.Nombre</strong>?
+</div>
+
+<div class="text-center mt-4">
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="BarberoId" />
+        <button type="submit" class="btn btn-danger me-2 fw-bold" style="background-color:#b30000; border-color:#8c0000;"></button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

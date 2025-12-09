@@ -1,0 +1,61 @@
+﻿@using System.Linq
+@model List<TimeSpan>
+
+@{
+    ViewData["Title"] = "Seleccionar Horario";
+}
+
+    <h2 class="text-center mt-4 fw-bold">⏰ Seleccione un horario disponible</h2>
+    <p class="text-center text-muted mb-4">
+        Horarios disponibles para el barbero seleccionado en la fecha:
+        <strong>@ViewBag.Fecha.ToString("dd/MM/yyyy")</strong>
+    </p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning text-center fw-semibold">
+                    No hay horarios disponibles para esta fecha.
+                </div>
+            }
+            else
+            {
+                <div class="row g-3">
+                    @foreach (var hora in Model)
+                    {
+                        <div class="col-6 col-md-4">
+                            <form method="post" asp-action="Confirmar">
+
+                                <!-- YA NO SE ENVÍA clienteId -->
+
+                                <input type="hidden" name="barberoId" value="@ViewBag.BarberoId" />
+                                <input type="hidden" name="fecha" value="@ViewBag.Fecha.ToString("yyyy-MM-dd")" />
+
+                                @foreach (var s in (ViewBag.ServiciosSeleccionados as List<int> ?? new List<int>()))
+                                {
+                                    <input type="hidden" name="serviciosSeleccionados" value="@s" />
+                                }
+
+                                <input type="hidden" name="hora" value="@hora" />
+
+                                <button type="submit"
+                                        class="btn btn-outline-primary w-100 py-3 fw-bold shadow-sm">
+                                    @hora.ToString(@"hh\:mm")
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+
+            <div class="text-center mt-4">
+                <a href="/Agendar" class="btn btn-secondary px-4">
+                    ⬅ Volver
+                </a>
+            </div>
+
+        </div>
+    </div>
+

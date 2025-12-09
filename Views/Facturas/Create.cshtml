@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Generar Factura";
+}
+
+<h2 class="text-center mt-4 fw-bold">🧾 Generar Factura</h2>
+<p class="text-center text-muted mb-4">
+    La factura se llenó automáticamente con los datos de la cita realizada.
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-header text-white text-center py-3 rounded-top-4"
+                 style="background: linear-gradient(135deg, #00bfa5, #009688);">
+                <h4 class="fw-bold mb-0">🧾 Factura Automática</h4>
+            </div>
+
+            <div class="card-body p-4">
+
+                <h5 class="fw-bold">Cliente:</h5>
+                <p class="mb-3">@ViewBag.Cliente</p>
+
+                <h5 class="fw-bold">Barbero:</h5>
+                <p class="mb-3">@ViewBag.Barbero</p>
+
+                <h5 class="fw-bold">Servicios realizados:</h5>
+                <ul class="list-group mb-4">
+                    @foreach (var s in ViewBag.Servicios)
+                    {
+                        <li class="list-group-item d-flex justify-content-between fw-semibold">
+                            @s.nombre
+                            <span class="text-success">₡@s.precio.ToString("N2", System.Globalization.CultureInfo.GetCultureInfo("es-CR"))</span>
+                        </li>
+                    }
+                </ul>
+
+                <div class="mb-4">
+                    <h4 class="fw-bold text-end">
+                        Total:
+                        <span class="text-success">
+                            ₡@ViewBag.Total.ToString("N2", System.Globalization.CultureInfo.GetCultureInfo("es-CR"))
+                        </span>
+                    </h4>
+                </div>
+
+                <form asp-action="CreateFactura" method="post">
+                    <input type="hidden" name="appointmentId" value="@ViewBag.AppointmentId" />
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success px-4 py-2 fw-bold shadow-sm me-2">
+                            💾 Guardar Factura
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary px-4 py-2">
+                            ⬅️ Cancelar
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

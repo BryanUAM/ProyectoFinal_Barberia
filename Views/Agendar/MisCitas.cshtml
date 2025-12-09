@@ -1,0 +1,69 @@
+﻿@model List<BarberiaLosHermanos.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Mis Citas";
+}
+
+<h2 class="text-center mt-4 fw-bold">📋 Mis Citas</h2>
+<p class="text-center text-muted mb-4">
+    Aquí puede ver el historial de todas sus citas.
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center fw-semibold">
+                No tiene citas registradas aún.
+            </div>
+        }
+        else
+        {
+            <table class="table table-hover shadow-sm rounded-4 overflow-hidden">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Barbero</th>
+                        <th>Servicios</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in Model)
+                    {
+                        <tr>
+                            <td>@c.FechaHora.ToString("dd/MM/yyyy hh:mm tt")</td>
+                            <td>@c.Barbero.Nombre</td>
+                            <td>
+                                <ul class="m-0 ps-3">
+                                    @foreach (var s in c.Servicios)
+                                    {
+                                        <li>@s.Producto.Nombre</li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                @if (c.Realizada)
+                                {
+                                    <span class="badge bg-success">Realizada</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <div class="text-center mt-4">
+            <a href="/Agendar" class="btn btn-primary px-4 py-2 fw-bold">
+                🗓 Agendar nueva cita
+            </a>
+        </div>
+
+    </div>
+</div>

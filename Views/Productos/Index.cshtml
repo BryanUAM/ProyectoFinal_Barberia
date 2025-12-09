@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BarberiaLosHermanos.Models.Producto>
+
+@{
+    ViewData["Title"] = "Servicios";
+}
+
+<h1 class="text-center mt-4 mb-4 fw-bold">✂️ Lista de Servicios</h1>
+
+<div class="text-end mb-3">
+    <a asp-action="Create" class="btn btn-dark">+ Agregar Servicio</a>
+</div>
+
+<table class="table table-hover shadow-sm border rounded">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Precio)</th>
+            <th>@Html.DisplayNameFor(model => model.Disponible)</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>₡@string.Format("{0:N2}", item.Precio)</td>
+                <td>
+                    @if (item.Disponible)
+                    {
+                        <span class="badge bg-success">Disponible</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">No disponible</span>
+                    }
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.ProductoId" class="btn btn-sm btn-outline-primary me-2">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.ProductoId" class="btn btn-sm btn-outline-info me-2">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProductoId" class="btn btn-sm fw-bold"
+                       style="color:#b30000; border:2px solid #b30000;">
+                        🗑 Eliminar>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning text-center mt-4">
+        No hay servicios registrados actualmente.
+    </div>
+}
+

@@ -1,0 +1,129 @@
+﻿@{
+    var ruta = Context.Request.Path.ToString().ToLower();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Barbería Los Hermanos</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Barbería Los Hermanos.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom mb-3 shadow">
+            <div class="container">
+
+                <!-- LOGO -->
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                    💈 Barbería Los Hermanos
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav ms-auto">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <!-- Panel Admin principal -->
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Admin" asp-action="Index">Panel Admin</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Productos" asp-action="Index">Servicios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Facturas" asp-action="Index">Facturas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Appointments" asp-action="Index">Citas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Barberos" asp-action="Index">Barberos</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Inicio</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="/Agendar">Agendar Cita</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Agendar" asp-action="MisCitas">Mis Citas</a>
+                                </li>
+                            }
+
+                            <!-- Nombre del usuario -->
+                            <li class="nav-item">
+                                <span class="nav-link text-white fw-bold">Hola, @User.Identity.Name</span>
+                            </li>
+
+                            <!-- Logout -->
+                            <li class="nav-item">
+                                <a class="nav-link text-warning fw-bold" href="/Account/Logout">Cerrar Sesión</a>
+                            </li>
+                        }
+                        else
+                        {
+                            /* ===========================
+                            NO LOGUEADO
+                            =========================== */
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/Admin">Administración</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-warning fw-bold" href="/Account/Login">Iniciar Sesión</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-3">
+        <div class="container">
+            &copy; 2025 - Barbería Los Hermanos -
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

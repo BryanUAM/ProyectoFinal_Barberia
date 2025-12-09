@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Crear Cita";
+}
+
+<h2 class="text-center mt-4 fw-bold">➕ Agendar Nueva Cita</h2>
+
+<p class="text-center text-muted mb-4">
+    Complete el formulario para registrar una nueva cita.
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-header bg-dark text-white rounded-top-4">
+                <h4 class="fw-bold mb-0">Nueva Cita</h4>
+            </div>
+
+            <div class="card-body p-4">
+
+                <form asp-action="Create" method="post">
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Cliente</label>
+                        <select name="ClienteId" class="form-select" required>
+                            <option value="">Seleccione un cliente</option>
+
+                            @foreach (var c in ViewBag.Clientes)
+                            {
+                                <option value="@c.ClienteId">@c.Nombre</option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Barbero</label>
+                        <select name="BarberoId" class="form-select" required>
+                            <option value="">Seleccione un barbero</option>
+
+                            @foreach (var b in ViewBag.Barberos)
+                            {
+                                <option value="@b.BarberoId">@b.Nombre</option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Servicios</label>
+                        <div class="border rounded p-3" style="background:#fafafa;">
+
+                            @foreach (var s in ViewBag.Servicios)
+                            {
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="serviciosSeleccionados"
+                                           value="@s.ProductoId" />
+
+                                    <label class="form-check-label fw-semibold">
+                                        @s.Nombre –
+                                        <span class="text-success">₡@s.Precio.ToString("N0")</span>
+                                    </label>
+                                </div>
+                            }
+
+                        </div>
+                        <small class="text-muted">Puede seleccionar uno o varios servicios</small>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Fecha y Hora</label>
+
+                        <input type="datetime-local"
+                               name="FechaHora"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="Index" class="btn btn-secondary px-4 me-2">⬅ Volver</a>
+                        <button type="submit" class="btn btn-primary fw-bold px-4">💾 Guardar Cita</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

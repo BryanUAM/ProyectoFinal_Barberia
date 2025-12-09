@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Confirmar Cita";
+
+    var clienteNombre = ViewBag.ClienteNombre;
+    var clienteId = ViewBag.ClienteId;
+
+    var barbero = ViewBag.Barbero;
+    var servicios = ViewBag.Servicios;
+    DateTime fechaHora = ViewBag.FechaHora;
+    List<int> serviciosSeleccionados = ViewBag.ServiciosSeleccionados;
+}
+
+<h2 class="text-center mt-4 fw-bold">📝 Confirmación de Cita</h2>
+<p class="text-center text-muted mb-4">
+    Revise los detalles antes de confirmar la reserva.
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="card shadow-lg rounded-4 border-0">
+            <div class="card-body p-4">
+
+                <h4 class="fw-bold mb-3">📌 Información del Cliente</h4>
+                <p class="ms-2"><strong>Nombre:</strong> @clienteNombre</p>
+
+                <h4 class="fw-bold mt-4 mb-3">💈 Barbero Seleccionado</h4>
+                <p class="ms-2">@barbero.Nombre</p>
+
+                <h4 class="fw-bold mt-4 mb-3">🔧 Servicios Elegidos</h4>
+                <ul class="list-group mb-3">
+                    @foreach (var s in servicios)
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            @s.Nombre
+                            <span class="text-success fw-bold">₡@s.Precio</span>
+                        </li>
+                    }
+                </ul>
+
+                <h4 class="fw-bold mt-4 mb-3">⏰ Fecha y Hora</h4>
+                <p class="fs-5 ms-2">
+                    <strong>@fechaHora.ToString("dd/MM/yyyy hh:mm tt")</strong>
+                </p>
+
+                <form method="post" asp-action="AgendarCita">
+
+                    <input type="hidden" name="clienteId" value="@clienteId" />
+                    <input type="hidden" name="barberoId" value="@barbero.BarberoId" />
+                    <input type="hidden" name="fechaHora" value="@fechaHora.ToString("yyyy-MM-dd HH:mm:ss")" />
+
+                    @foreach (var s in serviciosSeleccionados)
+                    {
+                        <input type="hidden" name="serviciosSeleccionados" value="@s" />
+                    }
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success px-4 py-2 fw-bold shadow-sm">
+                            ✔ Confirmar Cita
+                        </button>
+
+                        <a href="/Agendar" class="btn btn-secondary px-4 py-2 ms-2">
+                            ⬅ Cambiar Datos
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

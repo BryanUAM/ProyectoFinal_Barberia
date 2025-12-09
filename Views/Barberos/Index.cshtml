@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BarberiaLosHermanos.Models.Barbero>
+
+@{
+    ViewData["Title"] = "Barberos";
+}
+
+<h2 class="text-center fw-bold mt-4">💈 Gestión de Barberos</h2>
+
+<div class="text-center mb-4">
+    <a asp-action="Create" class="btn btn-dark">➕ Agregar Barbero</a>
+</div>
+
+<table class="table table-striped shadow-sm text-center align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Activo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.Nombre</td>
+                <td>
+                    @if (b.Activo)
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactivo</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@b.BarberoId" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@b.BarberoId"
+                       class="btn btn-sm fw-bold"
+                       style="color:#b30000; border:2px solid #b30000;">
+                        🗑 Eliminar
+                    </a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

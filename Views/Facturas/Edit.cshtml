@@ -1,0 +1,76 @@
+﻿@model BarberiaLosHermanos.Models.Factura
+
+@{
+    ViewData["Title"] = "Editar Factura";
+}
+
+<div class="container mt-5" style="max-width: 800px;">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header text-white text-center py-3 rounded-top-4"
+             style="background: linear-gradient(135deg, #00c853, #009624);">
+            <h3 class="fw-bold mb-0">🧾 Editar Factura</h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="Edit">
+
+                <input type="hidden" asp-for="FacturaId" />
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Cliente</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-primary text-white">
+                            <i class="bi bi-person-fill"></i>
+                        </span>
+                        <select asp-for="ClienteId" asp-items="ViewBag.ClienteId" class="form-select"></select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Fecha</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-info text-white">
+                            <i class="bi bi-calendar-event-fill"></i>
+                        </span>
+                        <input asp-for="Fecha" type="date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Total (₡)</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-success text-white">
+                            ₡
+                        </span>
+                        <input asp-for="MontoTotal" type="number" min="0" step="100" class="form-control" placeholder="Ej: 5000" />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4 fw-semibold">
+                        ⬅ Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-success px-4 fw-bold shadow-sm">
+                        Guardar Cambios
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

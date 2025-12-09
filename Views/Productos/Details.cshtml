@@ -1,0 +1,54 @@
+﻿@model BarberiaLosHermanos.Models.Producto
+
+@{
+    ViewData["Title"] = "Detalles del Servicio";
+}
+
+<h2 class="text-center mt-4 fw-bold">💈 Detalles del Servicio</h2>
+<p class="text-center text-muted mb-4">Información detallada del servicio seleccionado</p>
+
+<div class="d-flex justify-content-center">
+    <div class="card shadow-lg border-0 rounded-4" style="width: 28rem;">
+        <div class="card-body p-4">
+            <div class="text-center mb-4">
+                <div class="bg-dark text-white d-inline-block p-3 rounded-circle mb-2">
+                    <i class="bi bi-scissors fs-2"></i>
+                </div>
+                <h4 class="fw-bold text-primary">@Model.Nombre</h4>
+                <p class="text-muted mb-0">Código de servicio: <strong>#@Model.ProductoId</strong></p>
+            </div>
+
+            <hr />
+
+            <dl class="row mb-3">
+                <dt class="col-sm-5 fw-semibold"><i class="bi bi-cash-coin me-2 text-success"></i>Precio</dt>
+                <dd class="col-sm-7 text-end fw-bold text-success fs-5">
+                    ₡@Model.Precio.ToString("N2", System.Globalization.CultureInfo.GetCultureInfo("es-CR"))
+                </dd>
+
+                <dt class="col-sm-5 fw-semibold"><i class="bi bi-check-circle me-2 text-info"></i>Disponible</dt>
+                <dd class="col-sm-7 text-end">
+                    @if (Model.Disponible)
+                    {
+                        <span class="badge bg-success px-3 py-2">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger px-3 py-2">Inactivo</span>
+                    }
+                </dd>
+            </dl>
+
+            <hr />
+
+            <div class="text-center mt-3">
+                <a asp-action="Edit" asp-route-id="@Model.ProductoId" class="btn btn-warning me-2">
+                    ✏️ Editar
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    ⬅️ Volver al listado
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

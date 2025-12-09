@@ -1,0 +1,120 @@
+/* Tamaño base de la fuente */
+html {
+    font-size: 14px;
+}
+
+/* Aumenta el tamaño de letra en pantallas grandes */
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Asegura que la página tenga el alto mínimo de la ventana */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* Deja espacio para footers fijos */
+body {
+    margin-bottom: 60px;
+}
+
+/* ------------------------------------------------------- */
+/*  FONDO DE LA PÁGINA DE INICIO (HOME)                    */
+/* ------------------------------------------------------- */
+
+.home-bg {
+    position: relative; /* Permite colocar la capa oscura encima */
+    
+    /* Imagen de fondo */
+    background-image: url('../img/29886632_4229.jpg');
+    background-size: cover;        /* Cubre toda la pantalla */
+    background-position: center;   /* Centrada */
+    background-repeat: no-repeat;  /* No se repite */
+
+    height: 100vh; /* Ocupa todo el alto visible */
+    width: 100%;   /* Ocupa todo el ancho */
+
+    /* Centrado del contenido */
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;  /* Centrado vertical */
+    align-items: center;      /* Centrado horizontal */
+    text-align: center;
+
+    padding: 20px; /* Espacio interno */
+}
+
+/* Capa oscura encima del fondo para legibilidad */
+.home-bg::before {
+    content: ""; 
+    position: absolute;
+    inset: 0; /* Cubre todo el div */
+    background: rgba(0, 0, 0, 0.55); /* Oscurece la imagen */
+    backdrop-filter: blur(2px);      /* Difumina ligeramente */
+}
+
+/* Asegura que el contenido vaya por encima de la capa oscura */
+.home-bg > * {
+    position: relative;
+    z-index: 2;                   /* Se pone encima */
+    color: white !important;      /* Texto blanco */
+    text-shadow: 0px 3px 8px rgba(0,0,0,0.8); /* Sombra del texto */
+}
+
+/* ------------------------------------------------------- */
+/*  BOTONES                                                */
+/* ------------------------------------------------------- */
+
+/* Botón principal */
+.btn-primary {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Sombra */
+    border: none; /* Quita el borde azul */
+}
+
+/* Cambio de color en hover */
+.btn-primary:hover {
+    background-color: #0056d6;
+}
+
+/* Efecto de vidrio en botones outline */
+.btn-outline-light {
+    backdrop-filter: blur(2px);
+}
+
+/* Hover del botón outline */
+.btn-outline-light:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* ------------------------------------------------------- */
+/*  TARJETAS, SOMBRAS Y CONTROL DE FORMULARIOS             */
+/* ------------------------------------------------------- */
+
+/* Bordes redondeados de tarjetas */
+.card {
+    border-radius: 10px;
+}
+
+/* Sombra suave personalizada */
+.shadow-soft {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Tablas redondeadas */
+table {
+    border-radius: 8px !important;
+    overflow: hidden; /* Para que el borde afecte toda la tabla */
+}
+
+/* Cabecera de tabla más marcada */
+thead {
+    font-weight: bold;
+}
+
+/* Inputs con borde redondeado */
+.form-control {
+    border-radius: 8px;
+}

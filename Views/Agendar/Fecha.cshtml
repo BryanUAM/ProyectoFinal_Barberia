@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Seleccionar Fecha";
+    int productoId = ViewBag.ProductoId;
+}
+
+<h2 class="text-center mt-4 fw-bold">📅 Seleccione una fecha</h2>
+<p class="text-center text-muted">Puede reservar dentro de los próximos 7 días</p>
+
+<div class="d-flex justify-content-center mt-4">
+    <form method="get" action="/Agendar/Horarios" class="card p-4 shadow-sm" style="width: 350px;">
+        <input type="hidden" name="productoId" value="@productoId" />
+
+        <label class="fw-semibold">Fecha:</label>
+        <input type="date" name="fecha" class="form-control" required
+               min="@DateTime.Today.ToString("yyyy-MM-dd")"
+               max="@DateTime.Today.AddDays(7).ToString("yyyy-MM-dd")" />
+
+        <button class="btn btn-primary mt-3 w-100">Ver horarios disponibles</button>
+    </form>
+</div>

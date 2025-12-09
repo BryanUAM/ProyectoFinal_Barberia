@@ -1,0 +1,62 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL5510\\Documents\\UAM\\Progra 3\\BarberiaLosHermanos\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{31FA52C7-CA0D-9731-2189-59F9DFCFF215}|BarberiaLosHermanos.csproj|c:\\users\\dell5510\\documents\\uam\\progra 3\\barberialoshermanos\\controllers\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31FA52C7-CA0D-9731-2189-59F9DFCFF215}|BarberiaLosHermanos.csproj|solutionrelative:controllers\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31FA52C7-CA0D-9731-2189-59F9DFCFF215}|BarberiaLosHermanos.csproj|c:\\users\\dell5510\\documents\\uam\\progra 3\\barberialoshermanos\\wwwroot\\lib\\jquery\\dist\\jquery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{31FA52C7-CA0D-9731-2189-59F9DFCFF215}|BarberiaLosHermanos.csproj|solutionrelative:wwwroot\\lib\\jquery\\dist\\jquery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Account.cs",
+              "DocumentMoniker": "C:\\Users\\DELL5510\\Documents\\UAM\\Progra 3\\BarberiaLosHermanos\\Controllers\\Account.cs",
+              "RelativeDocumentMoniker": "Controllers\\Account.cs",
+              "ToolTip": "C:\\Users\\DELL5510\\Documents\\UAM\\Progra 3\\BarberiaLosHermanos\\Controllers\\Account.cs",
+              "RelativeToolTip": "Controllers\\Account.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAuwIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T19:59:37.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "jquery.js",
+              "DocumentMoniker": "C:\\Users\\DELL5510\\Documents\\UAM\\Progra 3\\BarberiaLosHermanos\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "ToolTip": "C:\\Users\\DELL5510\\Documents\\UAM\\Progra 3\\BarberiaLosHermanos\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "RelativeToolTip": "wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-27T19:57:33.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

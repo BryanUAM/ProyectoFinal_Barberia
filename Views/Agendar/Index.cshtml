@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Agendar Cita";
+}
+
+<h2 class="text-center mt-4 fw-bold">📅 Agendar Cita</h2>
+<p class="text-center text-muted mb-4">
+    Complete los datos para continuar con la reserva.
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header text-white text-center py-3 rounded-top-4"
+                 style="background: linear-gradient(135deg, #4e73df, #224abe);">
+                <h4 class="fw-bold mb-0">Formulario de Reserva</h4>
+            </div>
+
+            <div class="card-body p-4">
+
+                <form method="get" asp-action="Horarios">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Barbero</label>
+                        <select name="barberoId" class="form-select" required>
+                            <option value="">Seleccione un barbero</option>
+                            @foreach (var b in ViewBag.Barberos)
+                            {
+                                <option value="@b.BarberoId">@b.Nombre</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Fecha</label>
+                        <input type="date" name="fecha" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Servicios</label>
+
+                        @foreach (var s in ViewBag.Servicios)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="serviciosSeleccionados"
+                                       value="@s.ProductoId" id="serv_@s.ProductoId" />
+                                <label class="form-check-label" for="serv_@s.ProductoId">
+                                    @s.Nombre — <span class="text-success fw-bold">₡@s.Precio</span>
+                                </label>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">
+                            Siguiente ➜ Ver horarios disponibles
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

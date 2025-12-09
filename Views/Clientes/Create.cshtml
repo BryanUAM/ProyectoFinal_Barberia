@@ -1,0 +1,60 @@
+﻿@model BarberiaLosHermanos.Models.Cliente
+
+@{
+    ViewData["Title"] = "Registrar Cliente";
+}
+
+<h2 class="text-center mt-4 fw-bold">🧍‍♂️ Registrar Nuevo Cliente</h2>
+<p class="text-center text-muted mb-4">Complete los siguientes datos para registrar un nuevo cliente</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label fw-semibold">
+                            <i class="bi bi-person-fill me-1"></i> Nombre completo
+                        </label>
+                        <input asp-for="Nombre" class="form-control" placeholder="Ej. Andrés Mora Castillo" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label fw-semibold">
+                            <i class="bi bi-envelope-fill me-1"></i> Correo electrónico
+                        </label>
+                        <input asp-for="Email" class="form-control" placeholder="correo@ejemplo.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Telefono" class="form-label fw-semibold">
+                            <i class="bi bi-telephone-fill me-1"></i> Teléfono
+                        </label>
+                        <input asp-for="Telefono" class="form-control" placeholder="Ej. 8884-5621" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-dark px-4 me-2">
+                            💾 Registrar
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary px-4">
+                            ⬅️ Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

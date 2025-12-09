@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BarberiaLosHermanos.Models.Factura>
+
+@{
+    ViewData["Title"] = "Facturas";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success text-center mt-3 fw-semibold">
+        @TempData["Mensaje"]
+    </div>
+}
+
+<h2 class="text-center mt-4 fw-bold">📑 Facturas</h2>
+
+<p class="text-center mb-3">
+    <a asp-action="Create" class="btn btn-dark px-4 fw-semibold">
+        ➕ Registrar Nueva Factura
+    </a>
+</p>
+
+<table class="table table-striped mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Monto Total</th>
+            <th style="width:220px;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <!-- Fecha -->
+                <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+
+                <!-- Cliente -->
+                <td>@item.Cliente?.Nombre</td>
+
+                <!-- Monto total -->
+                <td>
+                    ₡@item.MontoTotal.ToString(
+                                    "N2",
+                                    System.Globalization.CultureInfo.GetCultureInfo("es-CR")
+                                    )
+            </td>
+
+                <!-- Acciones -->
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@item.FacturaId"
+                       class="btn btn-sm fw-semibold me-2"
+                       style="color:#0066cc; border:2px solid #0066cc;">
+                        👁 Ver Factura
+                    </a>
+
+                    <form asp-action="Delete"
+                          asp-route-id="@item.FacturaId"
+                          method="post"
+                          class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit"
+                                class="btn btn-sm fw-bold"
+                                style="color:#b30000; border:2px solid #b30000;"
+                                onclick="return confirm('¿Seguro que desea eliminar esta factura?');">
+                            🗑 Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+                }
+    </tbody>
+</table>

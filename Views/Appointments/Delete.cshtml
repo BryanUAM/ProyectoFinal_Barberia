@@ -1,0 +1,83 @@
+﻿@model BarberiaLosHermanos.Models.Appointment
+
+@{
+    ViewData["Title"] = "Eliminar Cita";
+}
+
+<h2 class="text-center mt-4 fw-bold text-danger">🗑️ Eliminar Cita</h2>
+
+<p class="text-center text-muted mb-4">
+    Confirme que desea eliminar esta cita. Esta acción no se puede deshacer.
+</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-header bg-danger text-white rounded-top-4">
+                <h4 class="fw-bold mb-0">Confirmar Eliminación</h4>
+            </div>
+
+            <div class="card-body p-4">
+
+                <p class="fs-5 mb-2">
+                    <strong>Cliente:</strong> @Model.Cliente?.Nombre
+                </p>
+
+                <p class="fs-5 mb-2">
+                    <strong>Barbero:</strong> @Model.Barbero?.Nombre
+                </p>
+
+                <h5 class="fw-bold mt-3">Servicios incluidos</h5>
+
+                <ul class="list-group mb-3">
+                    @foreach (var s in Model.Servicios)
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            @s.Producto.Nombre
+                            <span class="text-success fw-bold">₡@s.Producto.Precio.ToString("N0")</span>
+                        </li>
+                    }
+                </ul>
+
+                <p class="fs-5 mt-3">
+                    <strong>Fecha:</strong> @Model.FechaHora.ToString("dd/MM/yyyy") <br />
+                    <strong>Hora:</strong> @Model.FechaHora.ToString("hh:mm tt")
+                </p>
+
+                <p class="fs-5 mt-3">
+                    <strong>Estado:</strong>
+                    @if (Model.Realizada)
+                    {
+                        <span class="badge bg-success">Realizada</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    }
+                </p>
+
+            </div>
+
+            <div class="card-footer bg-light text-center rounded-bottom-4">
+
+                <form asp-action="Delete" method="post" class="d-inline">
+                    <input type="hidden" asp-for="AppointmentId" />
+                    <button type="submit"
+                            class="btn btn-danger me-2 fw-bold" style="background-color:#b30000; border-color:#8c0000;">
+                            onclick="return confirm('¿Está seguro que desea eliminar esta cita?');">
+                        🗑️ Sí, eliminar cita
+                    </button>
+                </form>
+
+                <a asp-action="Index" class="btn btn-secondary px-4">
+                    ⬅ Cancelar
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

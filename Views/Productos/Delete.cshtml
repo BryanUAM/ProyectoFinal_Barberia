@@ -1,0 +1,41 @@
+﻿@model BarberiaLosHermanos.Models.Producto
+
+@{
+    ViewData["Title"] = "Eliminar Servicio";
+}
+
+<h2 class="text-center mt-4 mb-4 fw-bold text-danger">🗑️ Eliminar Servicio</h2>
+
+<div class="alert alert-danger text-center w-75 mx-auto">
+    <p>¿Deseas eliminar este servicio? Esta acción no se puede deshacer.</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <dl class="row border p-3 rounded shadow-sm bg-light">
+            <dt class="col-sm-4">Nombre</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+            <dt class="col-sm-4">Precio</dt>
+            <dd class="col-sm-8">₡@string.Format("{0:N2}", Model.Precio)</dd>
+
+            <dt class="col-sm-4">Disponible</dt>
+            <dd class="col-sm-8">
+                @if (Model.Disponible)
+                {
+                    <span class="badge bg-success">Sí</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">No</span>
+                }
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" method="post" class="text-center mt-3">
+            <input type="hidden" asp-for="ProductoId" />
+            <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>

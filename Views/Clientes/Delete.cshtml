@@ -1,0 +1,32 @@
+﻿@model BarberiaLosHermanos.Models.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<h2 class="text-center mt-4 mb-4 fw-bold text-danger">🗑️ Eliminar Cliente</h2>
+
+<div class="alert alert-danger text-center w-75 mx-auto">
+    <p>¿Estás seguro que deseas eliminar este cliente?</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <dl class="row border p-3 rounded shadow-sm bg-light">
+            <dt class="col-sm-4">Nombre</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+            <dt class="col-sm-4">Correo</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt class="col-sm-4">Teléfono</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefono)</dd>
+        </dl>
+
+        <form asp-action="Delete" method="post" class="text-center mt-3">
+            <input type="hidden" asp-for="ClienteId" />
+            <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
